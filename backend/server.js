@@ -8,7 +8,12 @@ connectDB()
 
 const app = express()
 app.use(cors({
-  origin: [process.env.FRONTEND_URL || 'http://localhost:3000', /\.vercel\.app$/],
+  origin: [
+    'http://localhost:3000',
+    'https://autobenin.vercel.app',
+    process.env.FRONTEND_URL,
+    /\.vercel\.app$/,
+  ].filter(Boolean),
   credentials: true
 }))
 app.use(express.json())
