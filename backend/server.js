@@ -18,6 +18,7 @@ app.use(cors({
 }))
 app.use(express.json())
 
+app.get('/api/health', (req, res) => res.json({ status: 'ok', uptime: process.uptime() }))
 app.use('/api/auth',     require('./routes/authRoutes'))
 app.use('/api/cars',     require('./routes/carRoutes'))
 app.use('/api/bookings', require('./routes/bookingRoutes'))
@@ -31,3 +32,12 @@ app.use(require('./middleware/errorHandler'))
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT, () => console.log(`Serveur demarré sur le port ${PORT}`))
+// ── KEEP ALIVE — empêche Render de mettre le serveur en veille ──
+if (process.env.NODE_ENV === 'production') {
+  const https = require('https')
+  setInterval(() => {
+    https.get(process.env.RENDER_EXTERNAL_URL || 'https://autobenin.onrender.com/api/health', (res) => {
+      console.log('Keep-alive ping:', res.statusCode)
+    }).on('error', () => {})
+  }, 10 * 60 * 1000) // toutes les 10 minutes
+}
