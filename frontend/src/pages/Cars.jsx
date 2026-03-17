@@ -50,7 +50,7 @@ export default function Cars() {
   const [onlyVerified, setOnlyVerified] = useState(false)
   const [sort,         setSort]         = useState('rating_desc')
   const [search,       setSearch]       = useState('')
-  const [sidebarOpen,  setSidebarOpen]  = useState(true)
+  const [sidebarOpen,  setSidebarOpen]  = useState(typeof window !== 'undefined' && window.innerWidth > 768)
 
   // Nombre de filtres actifs (badge)
   const activeFilters = [
@@ -277,7 +277,7 @@ export default function Cars() {
         <div style={{ flex: 1, minWidth: 0 }}>
 
           {/* Toggle sidebar + résultats */}
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.2rem', flexWrap: 'wrap', gap: 8 }}>
             <button onClick={() => setSidebarOpen(v => !v)} style={{ display: 'flex', alignItems: 'center', gap: 6, background: '#fff', border: '1.5px solid #d5e8da', borderRadius: 10, padding: '7px 14px', fontWeight: 600, fontSize: '0.85rem', cursor: 'pointer', color: '#1a2e1e' }}>
               {sidebarOpen ? '◀ Masquer les filtres' : '▶ Afficher les filtres'}
               {activeFilters > 0 && !sidebarOpen && <span style={{ background: '#1a6b3c', color: '#fff', borderRadius: 50, padding: '1px 7px', fontSize: '0.7rem' }}>{activeFilters}</span>}
