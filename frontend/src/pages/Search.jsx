@@ -207,14 +207,24 @@ export default function Search() {
             <label style={lbl}>Options</label>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
               {[
-                [noDeposit,  setNoDeposit, '🎉 Sans caution uniquement'],
-                [verified,   setVerified,  '✓ Voitures vérifiées uniquement'],
+                [noDeposit, setNoDeposit, '🎉 Sans caution'],
+                [verified,  setVerified,  '✓ Vérifiées'],
               ].map(([val, setter, label]) => (
-                <label key={label} style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer', fontSize: '0.85rem', color: '#0d1f13' }}>
-                  <input type="checkbox" checked={val} onChange={e => setter(e.target.checked)}
-                    style={{ width: 16, height: 16, cursor: 'pointer', accentColor: '#1a6b3c' }} />
+                <button key={label} onClick={() => setter(!val)} style={{
+                  display: 'flex', alignItems: 'center', gap: 10,
+                  padding: '10px 14px', borderRadius: 10, cursor: 'pointer',
+                  border: val ? '2px solid #1a6b3c' : '1.5px solid #d5e8da',
+                  background: val ? '#e8f5ee' : '#fff',
+                  color: val ? '#1a6b3c' : '#5a7a62',
+                  fontWeight: val ? 700 : 500, fontSize: '0.85rem',
+                  fontFamily: "'DM Sans', sans-serif", textAlign: 'left',
+                  transition: 'all 0.15s', width: '100%',
+                }}>
+                  <span style={{ width: 20, height: 20, borderRadius: 6, border: val ? '2px solid #1a6b3c' : '2px solid #d5e8da', background: val ? '#1a6b3c' : '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, transition: 'all 0.15s' }}>
+                    {val && <span style={{ color: '#fff', fontSize: '0.75rem', fontWeight: 900 }}>✓</span>}
+                  </span>
                   {label}
-                </label>
+                </button>
               ))}
             </div>
           </div>
