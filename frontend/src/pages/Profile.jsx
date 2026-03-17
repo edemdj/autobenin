@@ -146,16 +146,16 @@ export default function Profile() {
       </div>
 
       {/* ── TABS ── */}
-      <div style={{ background: '#fff', borderBottom: '1px solid #d5e8da', padding: '0 5%' }}>
-        <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex' }}>
+      <div style={{ background: '#fff', borderBottom: '1px solid #d5e8da', padding: '0 5%', overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+        <div style={{ maxWidth: 900, margin: '0 auto', display: 'flex', minWidth: 'max-content' }}>
           {TABS.map((t, i) => (
             <button key={t} onClick={() => setTab(i)} style={{
               background: 'none', border: 'none', cursor: 'pointer',
-              padding: '1rem 1.4rem', fontFamily: "'DM Sans', sans-serif",
-              fontSize: '0.9rem', fontWeight: tab === i ? 700 : 500,
+              padding: '1rem 1.2rem', fontFamily: "'DM Sans', sans-serif",
+              fontSize: '0.85rem', fontWeight: tab === i ? 700 : 500,
               color: tab === i ? '#1a6b3c' : '#5a7a62',
               borderBottom: tab === i ? '2.5px solid #1a6b3c' : '2.5px solid transparent',
-              whiteSpace: 'nowrap', transition: 'all 0.2s',
+              whiteSpace: 'nowrap', transition: 'all 0.2s', flexShrink: 0,
             }}>{t}</button>
           ))}
         </div>

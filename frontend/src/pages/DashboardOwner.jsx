@@ -320,8 +320,8 @@ export default function DashboardOwner() {
       </div>
 
       {/* ── TABS ── */}
-      <div style={{ background: '#fff', borderBottom: '1px solid #d5e8da', padding: '0 5%' }}>
-        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', gap: 0, overflowX: 'auto' }}>
+      <div style={{ background: '#fff', borderBottom: '1px solid #d5e8da', overflowX: 'auto', WebkitOverflowScrolling: 'touch', scrollbarWidth: 'none' }}>
+        <div style={{ maxWidth: 1200, margin: '0 auto', display: 'flex', gap: 0, minWidth: 'max-content', padding: '0 5%' }}>
           {TABS.map((t, i) => (
             <button key={i} onClick={() => setTab(i)} style={{
               background: 'none', border: 'none', cursor: 'pointer',
