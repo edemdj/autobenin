@@ -138,6 +138,7 @@ export default function CarDetail() {
   const [showModal,  setShowModal]  = useState(false)
   const [paymentBooking, setPaymentBooking] = useState(null) // réservation à payer
   const [booked,     setBooked]     = useState(false)
+  const [reviews,   setReviews]   = useState([])
   const [booking,    setBooking]    = useState(false)
   const [bookError,  setBookError]  = useState('')
   const [startDate,  setStartDate]  = useState('')
