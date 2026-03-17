@@ -352,6 +352,43 @@ export default function CarDetail() {
       </div>
 
       {/* ── MODAL RÉSERVATION ── */}
+      {/* ── AVIS ET NOTES ── */}
+      {reviews.length > 0 && (
+        <div style={{ maxWidth: 1100, margin: '0 auto', padding: '0 5% 3rem' }}>
+          <div style={{ background: '#fff', borderRadius: 20, border: '1px solid #d5e8da', padding: '2rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.3rem', fontWeight: 700, margin: 0 }}>
+                Avis des locataires
+              </h3>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <span style={{ fontSize: '1.5rem', color: '#d4a017' }}>{'★'.repeat(Math.round(car.rating || 0))}</span>
+                <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: '1.2rem' }}>{car.rating || 0}</span>
+                <span style={{ color: '#5a7a62', fontSize: '0.85rem' }}>({reviews.length} avis)</span>
+              </div>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}>
+              {reviews.map(r => (
+                <div key={r._id} style={{ background: '#f7faf8', borderRadius: 14, padding: '1.2rem', border: '1px solid #d5e8da' }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                      <div style={{ width: 36, height: 36, borderRadius: '50%', background: 'linear-gradient(135deg,#1a6b3c,#d4a017)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: '0.85rem' }}>
+                        {r.reviewer?.name?.split(' ').map(n => n[0]).join('').slice(0,2).toUpperCase() || 'U'}
+                      </div>
+                      <div>
+                        <div style={{ fontWeight: 700, fontSize: '0.9rem' }}>{r.reviewer?.name || 'Locataire'}</div>
+                        <div style={{ fontSize: '0.72rem', color: '#5a7a62' }}>{new Date(r.createdAt).toLocaleDateString('fr-FR')}</div>
+                      </div>
+                    </div>
+                    <div style={{ color: '#d4a017', fontSize: '1rem' }}>{'★'.repeat(r.rating)}{'☆'.repeat(5 - r.rating)}</div>
+                  </div>
+                  {r.comment && <p style={{ fontSize: '0.85rem', color: '#0d1f13', margin: 0, lineHeight: 1.6 }}>{r.comment}</p>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {showModal && (
         <PaymentModal
           car={car}

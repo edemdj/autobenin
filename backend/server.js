@@ -27,6 +27,7 @@ app.use('/api/admin',    require('./routes/adminRoutes'))
 app.use('/api/disputes', require('./routes/disputeRoutes'))
 app.use('/api/finance',  require('./routes/financeRoutes'))
 app.use('/api/contracts', require('./routes/contractRoutes'))
+app.use('/api/reviews',   require('./routes/reviewRoutes'))
 
 app.use(require('./middleware/errorHandler'))
 

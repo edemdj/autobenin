@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { getMyBookings } from '../services/bookingService'
+import api from '../services/api'
 import DisputeModal from '../components/DisputeModal'
 
 const fmt = (n) => new Intl.NumberFormat('fr-FR').format(n) + ' FCFA'
@@ -92,8 +93,18 @@ export default function Profile() {
     setTimeout(() => setPwSaved(false), 3000)
   }
 
-  const handleReview = () => {
-    setTimeout(() => setReviewSent(true), 1200)
+  const handleReview = async () => {
+    if (!starPick) return
+    try {
+      await api.post('/reviews', {
+        bookingId: reviewModal._id || reviewModal.id,
+        rating:    starPick,
+        comment,
+      })
+      setReviewSent(true)
+    } catch (err) {
+      alert(err.response?.data?.message || `Erreur lors de l'envoi de l'avis.`)
+    }
   }
 
   const inp  = { width: '100%', padding: '10px 12px', border: '1.5px solid #d5e8da', borderRadius: 10, fontSize: '0.92rem', outline: 'none', boxSizing: 'border-box', fontFamily: "'DM Sans', sans-serif" }

@@ -19,6 +19,8 @@ const carSchema = new mongoose.Schema({
   isAvailable:   { type: Boolean, default: true },
   isVerified:    { type: Boolean, default: false },
   rating:        { type: Number, default: 0 },
+  reviewCount:   { type: Number, default: 0 },
+  rating:        { type: Number, default: 0 },
 }, { timestamps: true })
 
 module.exports = mongoose.model('Car', carSchema)
